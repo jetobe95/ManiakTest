@@ -105,9 +105,9 @@ const Navigation = () => {
         })
 
       },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
-      signUp: async data => {
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      signOut: async () => {
+        await AsyncStorage.clear();
+        dispatch({ type: 'SIGN_OUT' })
       },
     }),
     []
@@ -136,17 +136,14 @@ const Navigation = () => {
         <NavigationContainer >
           <Stack.Navigator>
             {state.userToken == null ? (
-              <>
-                <Stack.Screen name={NavigationRoutes.login} component={LoginScreen} />
-              </>
-
+              <Stack.Screen name={NavigationRoutes.login} component={LoginScreen} />
             ) : (
                 <Stack.Screen name={NavigationRoutes.homeStack} options={{ headerShown: false }} component={HomeTabNavigator} />
               )}
           </Stack.Navigator>
         </NavigationContainer>
       </AuthContext.Provider>
-      <ModalLoading visible={loading}/>
+      <ModalLoading visible={loading} />
     </>
   );
 };
