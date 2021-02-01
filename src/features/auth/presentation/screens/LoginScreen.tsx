@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Alert } from 'react-native';
-import { Header, Button, Divider } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Form } from 'react-final-form'
 import InputFormField from '../../../../core/presentation/InputField';
-import AuthRepositoryImpl from '../../data/auth_repository_impl';
-import  * as NavigationRoutes from '../../../../navigation/navigationRoutes';
 import { AuthContext } from '../hooks/authContext';
-interface LoginScreenProps { 
-    navigation:any
+interface LoginScreenProps {
+    navigation: any
 }
 interface ValidationErrors {
     email?: string
@@ -15,9 +13,10 @@ interface ValidationErrors {
 }
 
 
-const authRepositoryImpl = new AuthRepositoryImpl()
 const LoginScreen = (props: LoginScreenProps) => {
-    const {signIn} = React.useContext(AuthContext)
+    const { signIn } = React.useContext(AuthContext)
+
+    const [revealPassword, setRevealPassword] = React.useState<boolean>(false)
 
 
     const validate = (values: any): ValidationErrors => {
@@ -46,6 +45,10 @@ const LoginScreen = (props: LoginScreenProps) => {
                     <InputFormField
                         name='email'
                         inputProps={{
+                            keyboardType: 'email-address',
+                            leftIcon: {
+                                name: 'person'
+                            },
                             label: 'User email',
                             placeholder: 'your@email.com',
                         }}
@@ -56,8 +59,17 @@ const LoginScreen = (props: LoginScreenProps) => {
                         name='password'
                         inputProps={{
                             label: 'Password',
-                            secureTextEntry: true,
-                            placeholder: 'Your password here!'
+                            autoCorrect: false,
+                            secureTextEntry: !revealPassword,
+                            placeholder: 'Your password here!',
+                            leftIcon: {
+                                name: 'lock'
+                            },
+                            rightIcon: {
+                                type: 'feather',
+                                name: revealPassword ? 'eye-off' : 'eye',
+                                onPress: () => setRevealPassword((prevState) => !prevState)
+                            }
                         }}
                     />
                     <View style={{ height: 20 }} />
