@@ -13,7 +13,6 @@ const ImagesList = (props: ImagesListProps) => {
             data={props.data}
             keyExtractor={(item) => item.id?.toString()}
             renderItem={({ item }) => <ImageItem post={item} />}
-
         />
     );
 };

@@ -5,4 +5,14 @@ export default class Post {
     public description: string,
     public image: string,
   ){};
+
+
+  static fromJson(json:any):Post{
+    return new Post(
+      json.id,
+      json.title,
+      json.description,
+      json.image
+    );
+  }
 }
