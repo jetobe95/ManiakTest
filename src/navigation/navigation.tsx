@@ -44,11 +44,6 @@ const HomeTabNavigator = () => {
           return <Ionicons name={iconName} color={color} size={size} />;
         }
       })}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}
-
     >
       <Tab.Screen name={NavigationRoutes.home} component={HomeStack} />
       <Tab.Screen name={NavigationRoutes.signOut} component={SignOutStack} />

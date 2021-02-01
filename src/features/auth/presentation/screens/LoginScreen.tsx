@@ -46,7 +46,7 @@ const LoginScreen = (props: LoginScreenProps) => {
                     <InputFormField
                         name='email'
                         inputProps={{
-                            label: 'Email',
+                            label: 'User email',
                             placeholder: 'your@email.com',
                         }}
 
